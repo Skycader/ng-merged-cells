@@ -8,6 +8,7 @@ interface HeaderInterface {
   colSpan: number;
   rowSpan: number;
   link: LinkInterface;
+  remove?: boolean;
 }
 
 class Header implements HeaderInterface {
@@ -24,6 +25,7 @@ interface ConfigInterface {
 }
 
 interface LinkInterface {
+  remove?: boolean;
   title: string;
   children: LinkInterface[];
 }
@@ -44,8 +46,22 @@ export class SuperTableComponent {
   public table = [];
   public thead: HeaderInterface[][] = [];
 
+  public deleteSelf(header: LinkInterface) {
+    header.remove = true;
+    this.buildTable();
+  }
+
   public delete(header: LinkInterface) {
     header.children = [];
+    this.buildTable();
+  }
+
+  ngOnInit() {
+    this.buildTable();
+  }
+
+  public addRow() {
+    this.config.push({ title: '', children: [] });
     this.buildTable();
   }
 
@@ -72,6 +88,7 @@ export class SuperTableComponent {
       this.thead.push([]);
     }
     headers.forEach((header) => {
+      if (header.remove) return;
       const th = new Header();
       th.title = header.title;
       th.link = header as LinkInterface;
@@ -126,7 +143,9 @@ export class SuperTableComponent {
     { title: 'Заголовок' } as Header,
   ];
 
-  public config = [
+  public config: LinkInterface[] = [];
+
+  public config3 = [
     {
       title: 'Name',
     },

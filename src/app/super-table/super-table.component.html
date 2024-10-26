@@ -1,59 +1,16 @@
-<p>super-table works!</p>
-
+<h2>Supreme table sheet</h2>
+<!-- <pre>{{ config | json }}</pre> -->
+<br />
 <table>
   <thead>
     <tr *ngFor="let head of thead">
       <th [colSpan]="th.colSpan" [rowSpan]="th.rowSpan" *ngFor="let th of head">
-        <span><input [(ngModel)]="th.title" /></span
+        <span><input [(ngModel)]="th.link.title" /></span
         ><button (click)="addKid(th.link)">Add kid</button>
+        <button (click)="deleteSelf(th.link)">Remove self</button>
         <button (click)="delete(th.link)">Remove all kids</button>
       </th>
     </tr>
+    <button (click)="addRow()">Add row</button>
   </thead>
 </table>
-<button (click)="buildTable()">Build table</button>
-
-<!-- <nz-table
-#groupingTable
-[nzData]="listOfData"
-nzBordered
-nzSize="middle"
-[nzScroll]="{ x: '1200px', y: '240px' }"
->
-<thead>
-  <tr>
-    <th rowspan="4" nzLeft>Name</th>
-    <th colspan="4">Other</th>
-    <th colspan="2">Company</th>
-    <th rowspan="4" nzRight>Gender</th>
-  </tr>
-  <tr>
-    <th rowspan="3">Age</th>
-    <th colspan="3">Address</th>
-    <th rowspan="3">Company Address</th>
-    <th rowspan="3">Company Name</th>
-  </tr>
-  <tr>
-    <th rowspan="2">Street</th>
-    <th colspan="2">Block</th>
-  </tr>
-  <tr>
-    <th>Building</th>
-    <th>Door No.</th>
-  </tr>
-</thead>
-<tbody>
-  @for (data of groupingTable.data; track data) {
-  <tr>
-    <td nzLeft>{{ data.name }}</td>
-    <td>{{ data.age }}</td>
-    <td>{{ data.street }}</td>
-    <td>{{ data.building }}</td>
-    <td>{{ data.number }}</td>
-    <td>{{ data.companyAddress }}</td>
-    <td>{{ data.companyName }}</td>
-    <td nzRight>{{ data.gender }}</td>
-  </tr>
-  }
-</tbody>
-</nz-table> -->
