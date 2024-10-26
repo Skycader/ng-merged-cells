@@ -1,16 +1,25 @@
 <h2>Supreme table sheet</h2>
 <!-- <pre>{{ config | json }}</pre> -->
 <br />
+
+<button (click)="addRow('before')">+Row</button>
+<button (click)="addRow('before')">Row+</button>
+
 <table>
   <thead>
     <tr *ngFor="let head of thead">
       <th [colSpan]="th.colSpan" [rowSpan]="th.rowSpan" *ngFor="let th of head">
         <span><input [(ngModel)]="th.link.title" /></span
-        ><button (click)="addKid(th.link)">Add kid</button>
-        <button (click)="deleteSelf(th.link)">Remove self</button>
-        <button (click)="delete(th.link)">Remove all kids</button>
+        ><button (click)="addKid(th.link)">+</button>
+        <button (click)="deleteSelf(th.link)">-</button>
+        <button (click)="delete(th.link)">---</button>
       </th>
     </tr>
-    <button (click)="addRow()">Add row</button>
   </thead>
+
+  <tbody>
+    <tr>
+      <td *ngFor="let data of data_set">123</td>
+    </tr>
+  </tbody>
 </table>

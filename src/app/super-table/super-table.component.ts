@@ -60,8 +60,17 @@ export class SuperTableComponent {
     this.buildTable();
   }
 
-  public addRow() {
-    this.config.push({ title: '', children: [] });
+  public get data_set() {
+    let data = [];
+    let count = this.countLastLevelChildren(this.config);
+    for (let i = 0; i < count; i++) data.push({});
+    return data;
+  }
+
+  public addRow(where: string = 'after') {
+    if (where === 'after') this.config.push({ title: '', children: [] });
+    if (where === 'before') this.config.unshift({ title: '', children: [] });
+
     this.buildTable();
   }
 
@@ -132,7 +141,20 @@ export class SuperTableComponent {
     );
   }
 
-  // Example usage
+  public countLastLevelChildren = (nodes: LinkInterface[]): number => {
+    let count = 0;
+
+    const traverse = (node: LinkInterface) => {
+      if (!node.children || node.children.length === 0) {
+        count++;
+      } else {
+        node.children.forEach(traverse);
+      }
+    };
+
+    nodes.forEach(traverse);
+    return count;
+  };
 
   public config2 = [
     {
@@ -143,11 +165,12 @@ export class SuperTableComponent {
     { title: 'Заголовок' } as Header,
   ];
 
-  public config: LinkInterface[] = [];
+  public config_EMPTY: LinkInterface[] = [];
 
-  public config3 = [
+  public config: LinkInterface[] = [
     {
       title: 'Name',
+      children: [],
     },
     {
       title: 'Other',
@@ -160,17 +183,21 @@ export class SuperTableComponent {
               children: [
                 {
                   title: 'day',
+                  children: [],
                 },
                 {
                   title: 'month',
+                  children: [],
                 },
                 {
                   title: 'year',
+                  children: [],
                 },
               ],
             },
             {
               title: 'age',
+              children: [],
             },
           ],
         },
@@ -179,15 +206,18 @@ export class SuperTableComponent {
           children: [
             {
               title: 'Street',
+              children: [],
             },
             {
               title: 'block',
               children: [
                 {
                   title: 'Building',
+                  children: [],
                 },
                 {
                   title: 'Door no.',
+                  children: [],
                 },
               ],
             },
@@ -200,19 +230,27 @@ export class SuperTableComponent {
       children: [
         {
           title: 'Company address',
-          children: [{ title: 'country' }, { title: 'city' }],
+          children: [
+            { title: 'country', children: [] },
+            { title: 'city', children: [] },
+          ],
         },
         {
           title: 'Company name',
+          children: [],
         },
         {
           title: 'Company rating',
-          children: [{ title: 'Last year' }, { title: 'This year' }],
+          children: [
+            { title: 'Last year', children: [] },
+            { title: 'This year', children: [] },
+          ],
         },
       ],
     },
     {
       title: 'Gender',
+      children: [],
     },
   ];
 
