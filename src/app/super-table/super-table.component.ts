@@ -165,9 +165,9 @@ export class SuperTableComponent {
     { title: 'Заголовок' } as Header,
   ];
 
-  public config: LinkInterface[] = [];
+  public config_EMPTY: LinkInterface[] = [];
 
-  public config_FULL: LinkInterface[] = [
+  public config: LinkInterface[] = [
     {
       title: 'Name',
       children: [],
